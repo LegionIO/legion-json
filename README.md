@@ -1,43 +1,38 @@
-Legion::Json
-=====
+# legion-json
 
-Legion::Json is the JSON wrapper that is used by the LegionIO framework. It gives all other gems and extensions a single 
-json library to use for consistency. It wraps [multi_json](https://rubygems.org/gems/multi_json) and also [json_pure](https://rubygems.org/gems/json_pure)
+JSON wrapper module for the [LegionIO](https://github.com/LegionIO/LegionIO) framework. Wraps `multi_json` and `json_pure` to provide a consistent JSON interface across all Legion gems and extensions. Automatically uses faster C-extension JSON gems (like `oj`) when available.
 
-Additional C extension style json gems can be installed like [oj](https://rubygems.org/gems/oj) and it they should be 
-used automatically. 
-
-Supported Ruby versions and implementations
-------------------------------------------------
-
-Legion::Json should work identically on:
-
- * JRuby 9.2+
- * Ruby 2.4+
-
-
-Installation and Usage
-------------------------
-
-You can verify your installation using this piece of code:
+## Installation
 
 ```bash
 gem install legion-json
 ```
 
+Or add to your Gemfile:
+
 ```ruby
-require 'legion-json'
-json_string = '{"foo":"bar","nested":{"hello":"world"}}'
-Legion::Json.load(json_string)
-Legion::Json.load(json_string, symbolize_keys: false) # symbolize_keys defaults to true
-
-hash = {foo: 'bar', nested: {hello: 'world'}}
-Legion::Json.dump(hash)
-Legion::Json.dump(hash, )
-
+gem 'legion-json'
 ```
 
-Authors
-----------
+## Usage
 
-* [Matthew Iverson](https://github.com/Esity) - current maintainer
+```ruby
+require 'legion/json'
+
+json_string = '{"foo":"bar","nested":{"hello":"world"}}'
+Legion::Json.load(json_string)                          # => {foo: "bar", nested: {hello: "world"}}
+Legion::Json.load(json_string, symbolize_keys: false)   # => {"foo" => "bar", ...}
+
+hash = { foo: 'bar', nested: { hello: 'world' } }
+Legion::Json.dump(hash)                                 # => '{"foo":"bar","nested":{"hello":"world"}}'
+```
+
+Keys are symbolized by default, unlike standard Ruby JSON.
+
+## Requirements
+
+- Ruby >= 3.4
+
+## License
+
+Apache-2.0

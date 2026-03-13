@@ -1,9 +1,0 @@
-Legion::Json(legion-json)
-Copyright 2021 Optum
-
-Project Description:
-====================
-A JSON wrapper module for the LegionIO framework
-
-Author(s):
-Esity
