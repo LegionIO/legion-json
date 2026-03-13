@@ -1,14 +1,13 @@
 # legion-json: JSON Wrapper for LegionIO
 
 **Repository Level 3 Documentation**
-- **Category**: `/Users/miverso2/rubymine/arc/CLAUDE.md`
-- **Workspace**: `/Users/miverso2/rubymine/CLAUDE.md`
+- **Parent**: `/Users/miverso2/rubymine/legion/CLAUDE.md`
 
 ## Purpose
 
 JSON wrapper module for the LegionIO framework. Wraps `multi_json` and `json_pure` to provide a consistent JSON interface across all Legion gems and extensions. Automatically uses faster C-extension JSON gems (like `oj`) when available.
 
-**GitHub**: https://github.com/Optum/legion-json
+**GitHub**: https://github.com/LegionIO/legion-json
 **License**: Apache-2.0
 
 ## Architecture
