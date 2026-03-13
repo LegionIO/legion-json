@@ -178,11 +178,9 @@ end
 RSpec.describe Legion::JSON::ParseError do
   describe '.build' do
     let(:original_error) do
-      begin
-        MultiJson.load('{bad json}')
-      rescue StandardError => e
-        e
-      end
+      MultiJson.load('{bad json}')
+    rescue StandardError => e
+      e
     end
     let(:bad_input) { '{bad json}' }
     let(:parse_error) { described_class.build(original_error, bad_input) }
