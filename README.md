@@ -20,11 +20,11 @@ gem 'legion-json'
 require 'legion/json'
 
 json_string = '{"foo":"bar","nested":{"hello":"world"}}'
-Legion::Json.load(json_string)                          # => {foo: "bar", nested: {hello: "world"}}
-Legion::Json.load(json_string, symbolize_keys: false)   # => {"foo" => "bar", ...}
+Legion::JSON.load(json_string)                          # => {foo: "bar", nested: {hello: "world"}}
+Legion::JSON.load(json_string, symbolize_keys: false)   # => {"foo" => "bar", ...}
 
 hash = { foo: 'bar', nested: { hello: 'world' } }
-Legion::Json.dump(hash)                                 # => '{"foo":"bar","nested":{"hello":"world"}}'
+Legion::JSON.dump(hash)                                 # => '{"foo":"bar","nested":{"hello":"world"}}'
 ```
 
 Keys are symbolized by default, unlike standard Ruby JSON.

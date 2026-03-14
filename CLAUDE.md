@@ -13,9 +13,9 @@ JSON wrapper module for the LegionIO framework. Wraps `multi_json` and `json_pur
 ## Architecture
 
 ```
-Legion::Json
+Legion::JSON
 ├── .load(string, symbolize_keys: true)   # Deserialize JSON -> Hash
-├── .dump(hash)                            # Serialize Hash -> JSON
+├── .dump(object, pretty: false)          # Serialize Hash -> JSON
 ├── InvalidJson                            # Custom error class
 └── ParseError                             # JSON parse error class
 ```
@@ -45,6 +45,8 @@ Legion::Json
 ## Role in LegionIO
 
 **Foundation gem** - used by nearly every other Legion gem. `legion-settings` depends on it directly for config file parsing. All message serialization flows through this module.
+
+Note: Inside the `Legion::` namespace, `JSON` refers to `Legion::JSON` — callers outside this gem must use `::JSON` to access the stdlib.
 
 ```
 legion-json
