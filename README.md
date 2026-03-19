@@ -2,6 +2,8 @@
 
 JSON wrapper module for the [LegionIO](https://github.com/LegionIO/LegionIO) framework. Wraps `multi_json` and `json_pure` to provide a consistent JSON interface across all Legion gems and extensions. Automatically uses faster C-extension JSON gems (like `oj`) when available.
 
+**Version**: 1.2.0
+
 ## Installation
 
 ```bash
