@@ -5,6 +5,7 @@ require 'legion/json/parse_error'
 require 'legion/json/invalid_json'
 require 'json'
 require 'multi_json'
+require_relative 'json/helper'
 
 module Legion
   module JSON
