@@ -25,5 +25,27 @@ module Legion
       parser.dump(object, pretty: pretty)
     end
     module_function :dump
+
+    def parse(string, symbolize_names: true)
+      ::JSON.parse(string, symbolize_names: symbolize_names)
+    rescue ::JSON::ParserError => e
+      raise Legion::JSON::ParseError.build(e, string)
+    end
+    module_function :parse
+
+    def generate(object)
+      ::JSON.generate(object)
+    end
+    module_function :generate
+
+    def pretty_generate(object)
+      ::JSON.pretty_generate(object)
+    end
+    module_function :pretty_generate
+
+    def fast_generate(object)
+      ::JSON.fast_generate(object)
+    end
+    module_function :fast_generate
   end
 end

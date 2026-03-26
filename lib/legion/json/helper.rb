@@ -10,6 +10,18 @@ module Legion
       def json_dump(object, pretty: false)
         Legion::JSON.dump(object, pretty: pretty)
       end
+
+      def json_parse(string, symbolize_names: true)
+        Legion::JSON.parse(string, symbolize_names: symbolize_names)
+      end
+
+      def json_generate(object)
+        Legion::JSON.generate(object)
+      end
+
+      def json_pretty_generate(object)
+        Legion::JSON.pretty_generate(object)
+      end
     end
   end
 end

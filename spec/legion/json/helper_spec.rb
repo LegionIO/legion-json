@@ -38,4 +38,39 @@ RSpec.describe Legion::JSON::Helper do
       expect(result).to include("\n")
     end
   end
+
+  describe '#json_parse' do
+    it 'parses JSON with symbolized keys by default' do
+      result = instance.json_parse('{"name":"test"}')
+      expect(result).to eq(name: 'test')
+    end
+
+    it 'returns string keys when requested' do
+      result = instance.json_parse('{"name":"test"}', symbolize_names: false)
+      expect(result).to eq('name' => 'test')
+    end
+
+    it 'raises ParseError on invalid JSON' do
+      expect { instance.json_parse('not json') }.to raise_error(Legion::JSON::ParseError)
+    end
+  end
+
+  describe '#json_generate' do
+    it 'serializes a hash to compact JSON' do
+      result = instance.json_generate({ name: 'test' })
+      expect(result).to eq('{"name":"test"}')
+    end
+  end
+
+  describe '#json_pretty_generate' do
+    it 'produces formatted output with newlines' do
+      result = instance.json_pretty_generate({ name: 'test' })
+      expect(result).to include("\n")
+    end
+
+    it 'produces valid JSON' do
+      result = instance.json_pretty_generate({ name: 'test' })
+      expect(instance.json_parse(result)).to eq(name: 'test')
+    end
+  end
 end

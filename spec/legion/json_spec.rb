@@ -173,6 +173,99 @@ RSpec.describe Legion::JSON do
       end
     end
   end
+
+  describe '.parse' do
+    it 'parses JSON with symbolized keys by default' do
+      result = described_class.parse('{"foo":"bar"}')
+      expect(result).to eq(foo: 'bar')
+    end
+
+    it 'parses nested objects with symbolized keys' do
+      result = described_class.parse('{"outer":{"inner":"value"}}')
+      expect(result[:outer][:inner]).to eq('value')
+    end
+
+    it 'returns string keys when symbolize_names is false' do
+      result = described_class.parse('{"foo":"bar"}', symbolize_names: false)
+      expect(result).to eq('foo' => 'bar')
+    end
+
+    it 'parses arrays' do
+      result = described_class.parse('[1,"two",3]')
+      expect(result).to eq([1, 'two', 3])
+    end
+
+    it 'raises ParseError on invalid JSON' do
+      expect { described_class.parse('{bad}') }.to raise_error(Legion::JSON::ParseError)
+    end
+
+    it 'includes original input in ParseError' do
+      bad = '{"broken'
+      described_class.parse(bad)
+    rescue Legion::JSON::ParseError => e
+      expect(e.data).to eq(bad)
+    end
+
+    it 'round-trips with generate' do
+      original = { name: 'test', count: 5 }
+      json = described_class.generate(original)
+      result = described_class.parse(json)
+      expect(result).to eq(original)
+    end
+  end
+
+  describe '.generate' do
+    it 'serializes a hash to compact JSON' do
+      result = described_class.generate({ foo: 'bar' })
+      expect(result).to eq('{"foo":"bar"}')
+    end
+
+    it 'serializes an array' do
+      result = described_class.generate([1, 2, 3])
+      expect(result).to eq('[1,2,3]')
+    end
+
+    it 'produces compact output without newlines' do
+      result = described_class.generate({ a: 1, b: 2 })
+      expect(result).not_to include("\n")
+    end
+
+    it 'serializes nested structures' do
+      result = described_class.generate({ a: { b: [1, 2] } })
+      parsed = described_class.parse(result)
+      expect(parsed).to eq(a: { b: [1, 2] })
+    end
+  end
+
+  describe '.pretty_generate' do
+    it 'produces formatted output with newlines' do
+      result = described_class.pretty_generate({ foo: 'bar' })
+      expect(result).to include("\n")
+    end
+
+    it 'produces valid JSON that round-trips' do
+      original = { name: 'test', items: [1, 2] }
+      pretty = described_class.pretty_generate(original)
+      expect(described_class.parse(pretty)).to eq(original)
+    end
+
+    it 'produces indented output' do
+      result = described_class.pretty_generate({ foo: 'bar' })
+      expect(result).to include('  ')
+    end
+  end
+
+  describe '.fast_generate' do
+    it 'serializes a hash' do
+      result = described_class.fast_generate({ foo: 'bar' })
+      expect(described_class.parse(result)).to eq(foo: 'bar')
+    end
+
+    it 'serializes an array' do
+      result = described_class.fast_generate([1, 2, 3])
+      expect(described_class.parse(result)).to eq([1, 2, 3])
+    end
+  end
 end
 
 RSpec.describe Legion::JSON::ParseError do

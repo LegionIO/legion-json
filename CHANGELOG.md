@@ -1,5 +1,14 @@
 # Legion::JSON
 
+## [1.3.0] - 2026-03-26
+
+### Added
+- `.parse(string, symbolize_names: true)` — wraps `::JSON.parse` with `ParseError` error handling and symbol keys by default
+- `.generate(object)` — wraps `::JSON.generate` for compact output
+- `.pretty_generate(object)` — wraps `::JSON.pretty_generate` for formatted output
+- `.fast_generate(object)` — wraps `::JSON.fast_generate` for unchecked fast output
+- Helper methods: `json_parse`, `json_generate`, `json_pretty_generate` in `Legion::JSON::Helper`
+
 ## [1.2.1] - 2026-03-22
 
 ### Added
