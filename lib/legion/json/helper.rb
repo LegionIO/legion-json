@@ -8,7 +8,8 @@ module Legion
       end
 
       def json_dump(object, pretty: false)
-        Legion::JSON.dump(object, pretty: pretty)
+        opts = { pretty: pretty }
+        Legion::JSON.dump(object, **opts)
       end
 
       def json_parse(string, symbolize_names: true)
