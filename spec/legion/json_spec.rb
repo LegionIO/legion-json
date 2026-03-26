@@ -201,9 +201,9 @@ RSpec.describe Legion::JSON do
 
     it 'includes original input in ParseError' do
       bad = '{"broken'
-      described_class.parse(bad)
-    rescue Legion::JSON::ParseError => e
-      expect(e.data).to eq(bad)
+      expect { described_class.parse(bad) }.to raise_error(Legion::JSON::ParseError) do |e|
+        expect(e.data).to eq(bad)
+      end
     end
 
     it 'round-trips with generate' do

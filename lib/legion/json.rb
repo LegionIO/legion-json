@@ -28,7 +28,7 @@ module Legion
 
     def parse(string, symbolize_names: true)
       ::JSON.parse(string, symbolize_names: symbolize_names)
-    rescue ::JSON::ParserError => e
+    rescue StandardError => e
       raise Legion::JSON::ParseError.build(e, string)
     end
     module_function :parse
