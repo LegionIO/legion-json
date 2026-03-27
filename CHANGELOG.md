@@ -1,5 +1,11 @@
 # Legion::JSON
 
+## [1.3.1] - 2026-03-27
+
+### Changed
+- `.dump` now accepts `**kwargs` — callers can pass `Legion::JSON.dump(key: val)` without wrapping in `{}`
+- `pretty:` keyword option preserved; all other kwargs become the serialized object
+
 ## [1.3.0] - 2026-03-26
 
 ### Added

@@ -21,8 +21,9 @@ module Legion
     end
     module_function :load
 
-    def dump(object, pretty: false)
-      parser.dump(object, pretty: pretty)
+    def dump(object = nil, pretty: false, **kwargs)
+      data = object.nil? ? kwargs : object
+      parser.dump(data, pretty: pretty)
     end
     module_function :dump
 
