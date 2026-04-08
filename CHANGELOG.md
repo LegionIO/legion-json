@@ -1,5 +1,11 @@
 # Legion::JSON
 
+## [1.3.2] - 2026-04-08
+
+### Changed
+- `Legion::JSON` now extends `Legion::Logging::Helper` for structured exception logging
+- Parse errors in `.load` and `.parse` now emit a debug-level log via `handle_exception` before re-raising `ParseError`
+
 ## [1.3.1] - 2026-03-27
 
 ### Changed

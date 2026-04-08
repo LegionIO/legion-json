@@ -3,12 +3,15 @@
 require 'legion/json/version'
 require 'legion/json/parse_error'
 require 'legion/json/invalid_json'
+require 'legion/logging'
 require 'json'
 require 'multi_json'
 require_relative 'json/helper'
 
 module Legion
   module JSON
+    extend Legion::Logging::Helper
+
     def parser
       @parser ||= MultiJson
     end
@@ -17,6 +20,7 @@ module Legion
     def load(string, symbolize_keys: true)
       parser.load(string, symbolize_keys: symbolize_keys)
     rescue StandardError => e
+      handle_exception(e, level: :debug, operation: :json_load, string_length: string.to_s.length)
       raise Legion::JSON::ParseError.build(e, string)
     end
     module_function :load
@@ -30,6 +34,7 @@ module Legion
     def parse(string, symbolize_names: true)
       ::JSON.parse(string, symbolize_names: symbolize_names)
     rescue StandardError => e
+      handle_exception(e, level: :debug, operation: :json_parse, string_length: string.to_s.length)
       raise Legion::JSON::ParseError.build(e, string)
     end
     module_function :parse
