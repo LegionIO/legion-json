@@ -3,8 +3,6 @@
 require 'spec_helper'
 require 'legion/json'
 
-SimpleCov.command_name 'lib/legion/json'
-
 RSpec.describe Legion::JSON do
   describe '.parser' do
     it 'returns MultiJson as the default parser' do

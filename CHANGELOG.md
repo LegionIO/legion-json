@@ -1,5 +1,11 @@
 # Legion::JSON
 
+## [1.3.2] - 2026-04-08
+
+### Fixed
+- Removed `require 'legion/logging'` and `Legion::Logging::Helper` dependency that broke standalone usage (legion-logging is not a gemspec dependency)
+- Fixed SimpleCov profile not being activated in spec_helper, restoring 100% coverage enforcement
+
 ## [1.3.1] - 2026-03-27
 
 ### Changed
