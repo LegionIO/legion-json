@@ -9,7 +9,7 @@ begin
     add_filter '/tmp/'
   end
 
-  SimpleCov.start do
+  SimpleCov.start 'legion-json' do
     formatter SimpleCov::Formatter::SimpleFormatter if ENV.key? 'SONAR_TOKEN'
   end
   SimpleCov.use_merging(true)
