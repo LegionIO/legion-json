@@ -23,7 +23,8 @@ module Legion
 
     def dump(object = nil, pretty: false, **kwargs)
       data = object.nil? ? kwargs : object
-      parser.dump(data, pretty: pretty)
+      # Only pass pretty: when true — Oj/MultiJson treats any explicit pretty: (even false) as truthy
+      pretty ? parser.dump(data, pretty: true) : parser.dump(data)
     end
     module_function :dump
 

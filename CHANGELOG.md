@@ -1,5 +1,10 @@
 # Legion::JSON
 
+## [1.3.3] - 2026-04-14
+
+### Fixed
+- `Legion::JSON.dump` with `pretty: false` (the default) produced pretty-printed output when Oj adapter was active. Oj/MultiJson treats any explicit `pretty:` keyword (even `false`) as truthy. Fix: only pass `pretty: true` when requested; omit the keyword entirely otherwise.
+
 ## [1.3.2] - 2026-04-08
 
 ### Fixed
