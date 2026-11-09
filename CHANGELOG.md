@@ -1,5 +1,10 @@
 # Legion::JSON
 
+## [1.3.4] - 2026-11-09
+
+### Fixed
+- Preserve `Legion::JSON.fast_generate(object)` with JSON 3.x, which removed `JSON.fast_generate`: use `JSON.generate` when available and fall back to `JSON.fast_generate` otherwise.
+
 ## [1.3.3] - 2026-04-14
 
 ### Fixed

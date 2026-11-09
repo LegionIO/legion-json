@@ -2,7 +2,7 @@
 
 JSON wrapper module for the [LegionIO](https://github.com/LegionIO/LegionIO) framework. Wraps `multi_json` and `json_pure` to provide a consistent JSON interface across all Legion gems and extensions. Automatically uses faster C-extension JSON gems (like `oj`) when available.
 
-**Version**: 1.3.2
+**Version**: 1.3.4
 
 ## Installation
 
@@ -33,7 +33,7 @@ Legion::JSON.dump(pretty: true, foo: 'bar')             # keyword form — objec
 Legion::JSON.parse(json_string)               # ::JSON.parse with symbolize_names: true
 Legion::JSON.generate(object)                 # ::JSON.generate
 Legion::JSON.pretty_generate(object)          # ::JSON.pretty_generate
-Legion::JSON.fast_generate(object)            # ::JSON.fast_generate
+Legion::JSON.fast_generate(object)            # ::JSON.generate when available; otherwise ::JSON.fast_generate
 ```
 
 Keys are symbolized by default, unlike standard Ruby JSON. `load` delegates to `MultiJson`; `parse`/`generate`/`pretty_generate`/`fast_generate` delegate to Ruby's stdlib `::JSON`.

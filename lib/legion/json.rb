@@ -46,6 +46,8 @@ module Legion
     module_function :pretty_generate
 
     def fast_generate(object)
+      return ::JSON.generate(object) if ::JSON.respond_to?(:generate)
+
       ::JSON.fast_generate(object)
     end
     module_function :fast_generate
