@@ -263,6 +263,27 @@ RSpec.describe Legion::JSON do
       result = described_class.fast_generate([1, 2, 3])
       expect(described_class.parse(result)).to eq([1, 2, 3])
     end
+
+    it 'prefers generate when both backend methods are available' do
+      backend = Module.new
+      backend.define_singleton_method(:generate, &JSON.method(:generate))
+      backend.define_singleton_method(:fast_generate) { |_object| raise 'deprecated generator selected' }
+      stub_const('JSON', backend)
+
+      result = described_class.fast_generate({ items: [1, true, nil] })
+
+      expect(result).to eq('{"items":[1,true,null]}')
+    end
+
+    it 'serializes through fast_generate when the backend has no generate method' do
+      backend = Module.new
+      backend.define_singleton_method(:fast_generate, &JSON.method(:generate))
+      stub_const('JSON', backend)
+
+      result = described_class.fast_generate({ items: [1, true, nil] })
+
+      expect(result).to eq('{"items":[1,true,null]}')
+    end
   end
 end
 
